@@ -1,6 +1,14 @@
-const express = require('express'); //framework
-const db = require('./db');
-const app = express(); //obj server
-const port = 3000;
+const { Pool } = require('pg'); //Импортирует модуль pg для работы с PostgreSQL.
 
-app.use(express.static(__dirname)); //files aus direkt Ordner
+// Настройка подключения к базе данных PostgreSQL
+const pool = new Pool({
+user: 'sergeiemm',             
+host: 'localhost',
+database: 'test_db',          
+password: '9119',                 
+port: 5432,
+});
+
+module.exports = {
+query: (text, params) => pool.query(text, params),
+};
