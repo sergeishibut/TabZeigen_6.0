@@ -15,7 +15,7 @@ app.get("/api/data",async(req, res) => {
 app.put("/api/data,", async(req, res) => {
     const { id, field, value } = req.body;
     const anfrage = `UPDATE abc SET ${field} = $1 WHERE id = $2`;
-    await db.query(anfrage, [validateHeaderValue, id]);
+    await db.query(anfrage, [value, id]);
     res.json({success: true });
 })
 
