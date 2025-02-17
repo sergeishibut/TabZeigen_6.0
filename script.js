@@ -19,8 +19,23 @@ function createInput(row, container) {
     ["id", "a", "b","c"].forEach(key => {
         const input = document.createElement("input");
         input.value = row[key];
+
+        input.addEventListener("change", () => {
+            updateData(row.id, key, input.value);
+        });
+
         div.appendChild(input);
+        console.log(div); //чтобы посмотреть что добавилось
     });
     container.appendChild(div);
 
+}
+
+async function updateData(id, field, value) {
+    console.log(`Отправка: id=${id}, field=${field}, value=${value}`);
+    await fetch("/api/data", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id, field, value })
+    });
 }

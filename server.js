@@ -12,7 +12,7 @@ app.get("/api/data",async(req, res) => {
     res.json(result.rows);
 });
 //update data
-app.put("/api/data,", async(req, res) => {
+app.put("/api/data", async(req, res) => {
     const { id, field, value } = req.body;
     const anfrage = `UPDATE abc SET ${field} = $1 WHERE id = $2`;
     await db.query(anfrage, [value, id]);
