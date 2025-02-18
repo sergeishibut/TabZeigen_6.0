@@ -8,34 +8,45 @@ async function loadData() {
 
     const container = document.getElementById("data-container");//finden cont
     container.innerHTML = ""; //leer
+    // container.style.backgroundColor = "green"//marker
     data.forEach(row => {
         createInput(row, container); 
     });
     
-};
+}
 
 function createInput(row, container) {
     const div = document.createElement("div");
     ["id", "a", "b","c"].forEach(key => {
         const input = document.createElement("input");
+         
         input.value = row[key];
-
-        input.addEventListener("change", () => {
-            updateData(row.id, key, input.value);
+        //kann änderung sehen!
+        input.addEventListener("input", () => {
+            input.style.backgroundColor = "red";
+            input.style.color = "white";
         });
 
-        div.appendChild(input);
-        console.log(div); //чтобы посмотреть что добавилось
+        //add change für änderungen speichern
+        input.addEventListener("change", () => {
+            updateData(row.id, key, input.value);
+            input.style.backgroundColor = "green"; //änderung speichern
+            // container.style.backgroundColor = "red"//marker
+        });
+        
+        div.append(input); //input -> div
+        console.log(div); //zeight was passiert
     });
-    container.appendChild(div);
+    container.append(div); //div -> container
 
 }
 
 async function updateData(id, field, value) {
-    console.log(`Отправка: id=${id}, field=${field}, value=${value}`);
+    
+    console.log(`Änderungen! id=${id}, field=${field}, value=${value}`);
     await fetch("/api/data", {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id, field, value })
+        headers: { "Content-Type": "application/json" }, //server muss wissen dass JSON ist
+        body: JSON.stringify({ id, field, value }) //Obj to JSON
     });
-}
+};
