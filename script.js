@@ -72,3 +72,7 @@ document.getElementById("neueZahle").addEventListener("click", async function() 
         loadData(); 
     }
 });
+
+//löchen button
+
+

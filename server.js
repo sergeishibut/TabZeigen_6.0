@@ -25,8 +25,13 @@ app.post("/api/data", async (req, res) => {
     const result = await db.query("INSERT INTO abc (a, b, c) VALUES ($1, $2, $3) RETURNING *", [a, b, c]);
     res.json(result.rows[0]);
 });
-
-
+//delete data!!!
+app.delete("/api/data", async (req, res) => {
+    const { id } = req.body;
+    const anfrage = `DELETE FROM abc WHERE id=$1`;
+    await db.query(anfrage, [id]);
+    res.json({success: true });
+});
 
 
 app.listen(3000, () => console.log("Server ist hier http://localhost:3000"));

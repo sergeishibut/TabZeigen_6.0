@@ -13,7 +13,12 @@ input {
     width: 150px; /* Ширина */
 }
 
+.buttons {
+    display: flex;
+}
+
 .btn {
+    
     margin: 2px;
     font-size: 15px;
     width: 100px;
@@ -23,6 +28,12 @@ input {
     transition: .2s linear;
     background: #00b10f;
 }
+
+#delete {
+    background: #ff0000;
+}
+
+
 
 .btn:hover {
     -webkit-transform: rotateZ(7deg);
